@@ -32,6 +32,15 @@ public class Patron implements java.io.Serializable {
         checkoutList = new ArrayList<Copy>();
     }
     
+    /** Create a string representation for this Patron to be used in a list 
+     *  of patrons 
+     *  
+     *  @return the string 
+     */ 
+    public String toString() { 
+        return getPhoneNumber() + ": " + getFullName(); 
+    }
+    
     /** Accessor for the full name of this patron
      *
      *	@return the full name (first and last)
@@ -67,7 +76,7 @@ public class Patron implements java.io.Serializable {
     {
     int number = 0;
     for (int i = 0; i < getCurrentCopiesOut(); i++) {
-      if (checkoutList.get(i).getDateDue().isAfter(SimpleDate.getToday())) {
+      if (SimpleDate.getToday().isAfter(checkoutList.get(i).getDateDue())) {
         number++;
       }
     }

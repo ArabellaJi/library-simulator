@@ -4,6 +4,11 @@
 
 package library.gui;
 
+import library.controller.CheckoutUseCase;
+import library.controller.ReturnUseCase;
+import library.model.Copy;
+import library.model.LibraryDatabase;
+
 /** The pane associated with the "Return" tab on the main card of the GUI
  *
  * @author Russell C. Bjork
@@ -130,6 +135,13 @@ public class ReturnPane extends javax.swing.JPanel
         try
         {
             // Perform the return case for this particular copy
+            
+            String callNumber = callNumberField.getText();
+            int copyNumber = copyNumberField.getText().length() == 0
+                ? 1
+                : Integer.parseInt(copyNumberField.getText());
+            Copy copy = LibraryDatabase.getInstance().getCopy(callNumber, copyNumber);
+            ReturnUseCase.perform(copy);
         }
         catch(NumberFormatException e) {
             GUI.getInstance().showMessage("Copy number must be an integer");

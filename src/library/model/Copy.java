@@ -68,7 +68,7 @@ public class Copy implements java.io.Serializable {
      */
     public SimpleDate getDateWillBeDue() 
     {
-        dateDue = dateCheckOut.daysLater(item.getCheckoutPeriod());
+        dateDue = SimpleDate.getToday().daysLater(item.getCheckoutPeriod());
         return dateDue;
     }
     

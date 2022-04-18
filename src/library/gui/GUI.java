@@ -300,7 +300,7 @@ public class GUI extends javax.swing.JFrame
     private GUI() 
     {
         initComponents();
-        managerMenu.setVisible(false);
+        // managerMenu.setVisible(false);
         setJMenuBar(swingMenuBar);
 
         // Add the individual cards.  The first card added will

@@ -90,7 +90,6 @@ public class LibraryDatabase implements java.io.Serializable
      */
     public void save() throws Exception
     {
-        library.gui.GUI.getInstance().showMessage("Saving of data not yet enabled");
         ObjectOutputStream stream = new ObjectOutputStream(
                     new FileOutputStream(SAVED_DATABASE_NAME));
         stream.writeObject(theLibraryDatabase);

@@ -26,6 +26,16 @@ public abstract class Item implements java.io.Serializable {
         copies = new TreeMap<Integer, Copy>();
     }
     
+    /** Create a string representation for this this item to display in a list   
+     * of items 
+     *  
+     *  @return the string 
+     */ 
+    public String toString() { 
+        return getCallNumber() + ": " + getDescription() + " (" + 
+                copies.keySet().size() + " copies)"; 
+    }
+    
     /** Create a copy of this item
      * 
       *  @return the copy

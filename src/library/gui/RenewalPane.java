@@ -3,6 +3,9 @@
  */
 
 package library.gui;
+import library.controller.RenewalUseCase;
+import library.model.Copy;
+import library.model.LibraryDatabase;
 import library.model.SimpleDate;
 
 /** The pane associated with the "Renewal" tab on the main card of the GUI
@@ -119,7 +122,12 @@ public class RenewalPane extends javax.swing.JPanel {
     private void renewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_renewButtonActionPerformed
         try
         {
-            // Perform the renew case for this particular copy
+            String callNumber = callNumberField.getText();
+            int copyNumber = copyNumberField.getText().length() == 0
+                ? 1
+                : Integer.parseInt(copyNumberField.getText());
+            Copy copy = LibraryDatabase.getInstance().getCopy(callNumber, copyNumber);
+            RenewalUseCase.perform(copy);
         }
         catch(NumberFormatException e) {
             GUI.getInstance().showMessage("Copy number must be an integer");

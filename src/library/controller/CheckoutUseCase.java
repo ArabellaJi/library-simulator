@@ -6,6 +6,7 @@ package library.controller;
 
 import library.model.Copy;
 import library.model.Patron;
+import library.model.SimpleDate;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -31,6 +32,16 @@ public class CheckoutUseCase {
         copiesToBeCheckedOut = new ArrayList<Copy> ();
     }
     
+    /** Accessor for the one and only object of this class (singleton pattern)
+     *
+     *  @return the one and only object of this class
+     */
+    public static CheckoutUseCase getInstance() {
+        if (theCheckoutUseCase == null)
+            theCheckoutUseCase = new CheckoutUseCase();
+        return theCheckoutUseCase;
+    }
+    
     /** Accessor for the patron being checked out to
      *
      *  @return the patron being checked out to
@@ -49,6 +60,13 @@ public class CheckoutUseCase {
      */
     public void addCopy(Copy copy) throws IllegalArgumentException
     {
+        if(copiesToBeCheckedOut.contains(copy)) {
+            throw new IllegalArgumentException("The copy is already on the list.");
+        } else if(copy.isCheckedOut()) {
+            throw new IllegalArgumentException("The copy is already checked out.");
+        } else {
+            copiesToBeCheckedOut.add(copy);
+        }
     }
     
     /** Remove a copy from the list of copies to check out
@@ -57,21 +75,25 @@ public class CheckoutUseCase {
      */
     public void removeCopy(int position)
     {
+        copiesToBeCheckedOut.remove(position);
     }
     
     /** Clear all copies from the list of copies to check out
      */
     public void clearCopies()
     {
+        copiesToBeCheckedOut.removeAll(copiesToBeCheckedOut);
     }
     
     /** Check out all copies currently in the list to the patron
      */
     public void checkoutCopies()
     {
-        // For each copy in copiesToBeCheckedOut
-        //   Check out the copy
-        //   Add the copy to the list of copies the patron has
+        for(int i = 0; i < copiesToBeCheckedOut.size(); i++ ) {
+            SimpleDate dateDue = copiesToBeCheckedOut.get(i).getDateDue();
+            copiesToBeCheckedOut.get(i).checkOutTo(patronToCheckoutTo, dateDue);
+            patronToCheckoutTo.checkOut(copiesToBeCheckedOut.get(i));
+        }
     }
         
     /***************************************************************************
