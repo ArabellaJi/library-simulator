@@ -9,6 +9,8 @@ import library.model.LibraryDatabase;
 import library.model.Copy;
 import java.util.Observer;
 import java.util.Observable;
+import javax.swing.JOptionPane;
+import library.controller.ItemUseCase;
 
 /** The pane associated with the "Collection" tab on the main card of the GUI
  *
@@ -30,13 +32,13 @@ public class CollectionPane extends javax.swing.JPanel implements Observer
 //** FOR ITERATION 2, AFTER MAKING THE SPECIFIED CHANGES TO LibraryDatabase.java 
 //** (BUT NOT BEFORE) REMOVE THE COMMENT-MARKER FROM THE NEXT LINE AND THEN 
 // DELETE THESE COMMENT LINES!
-//        itemsList.setModel(LibraryDatabase.getInstance().getItemsModel());
+        itemsList.setModel(LibraryDatabase.getInstance().getItemsModel());
 //** AND DELETE THE NEXT 5 LINES INSTEAD.  THEN ALSO DELETE THIS COMMENT!
-        itemsListScrollPane.setVisible(false);
-        addBookButton.setVisible(false);
-        addDVDButton.setVisible(false);
-        addCopyButton.setVisible(false);
-        reportButton.setVisible(false);
+//        itemsListScrollPane.setVisible(false);
+//        addBookButton.setVisible(false);
+//        addDVDButton.setVisible(false);
+//        addCopyButton.setVisible(false);
+//        reportButton.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -171,23 +173,22 @@ public class CollectionPane extends javax.swing.JPanel implements Observer
     }//GEN-LAST:event_itemsListValueChanged
 
     private void addBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookButtonActionPerformed
-//**STUDENTS: ADD CODE HERE TO GO TO THE BOOK DETAILS CARD
-//** - THEN REMOVE THESE COMMENT LINES!
+        ItemUseCase.getInstance().start();
+        GUI.getInstance().gotoCard("bookdetails");
     }//GEN-LAST:event_addBookButtonActionPerformed
 
     private void addCopyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCopyButtonActionPerformed
         Item item = itemsList.getSelectedValue();
         if (item != null)
         {
-//** STUDENTS: ADD CODE HERE TO CALL THE CONTROLLER MEDTHOD THAT PERFORMS
-//** THE USE CASE AND THEN SHOW THE INFORMATION ABOUT THE NEWLY ADDED COPY
-//** - THEN REMOVE THESE COMMENT LINES!
+            Copy copy = item.makeCopy();
+            JOptionPane.showMessageDialog(null,"Copy added successfully!");
         }
     }//GEN-LAST:event_addCopyButtonActionPerformed
 
     private void addDVDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDVDButtonActionPerformed
-//**STUDENTS: ADD CODE HERE TO GO TO THE DVD DETAILS CARD
-//** - THEN REMOVE THESE COMMENT LINES!
+        ItemUseCase.getInstance().start();
+        GUI.getInstance().gotoCard("dvddetails");  
     }//GEN-LAST:event_addDVDButtonActionPerformed
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed

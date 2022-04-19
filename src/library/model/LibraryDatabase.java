@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import displayablecollections.DisplayableTreeMap;
+import javax.swing.ListModel; 
 
 /** A singleton object of this class represents the library's database
  *
@@ -48,11 +50,28 @@ public class LibraryDatabase implements java.io.Serializable
         return theLibraryDatabase;
     }
     
+    /** Get a list model for the patrons
+     * 
+     *  @return a list model
+     */
+    public ListModel<Patron> getPatronsModel()
+    {
+        return patrons.keyOrderedListModel();
+    } 
+    /** Get a list model for the items
+     * 
+     *  @return a list model
+     */
+    public ListModel<Item> getItemsModel()
+    {
+        return items.keyOrderedListModel();
+    } 
+    
     /** Get a Tree map of call numbers of all items 
      *
      *  @return the set coutain all items' call number 
      */  
-    public  TreeMap<String, Item> getItemList()
+    public  DisplayableTreeMap<String, Item> getItemList()
     {
         return items;
     }
@@ -70,7 +89,7 @@ public class LibraryDatabase implements java.io.Serializable
      *
      *  @return the set coutain all patrons
      */  
-    public  TreeMap<String, Patron> getPatronList()
+    public  DisplayableTreeMap<String, Patron> getPatronList()
     {
         return patrons;
     }
@@ -176,8 +195,8 @@ public class LibraryDatabase implements java.io.Serializable
     // pattern
     private LibraryDatabase() 
     {
-        patrons = new TreeMap<String, Patron>();
-        items = new TreeMap<String, Item>();  
+        patrons = new DisplayableTreeMap<String, Patron>();
+        items = new DisplayableTreeMap<String, Item>();  
         theLibraryDatabase = this;
         createDummyData();
     }
@@ -238,6 +257,6 @@ public class LibraryDatabase implements java.io.Serializable
     // when reading a serialized object created by an earlier version of this
     // class
     static final long serialVersionUID = 1;
-    private TreeMap<String, Patron> patrons;
-    private TreeMap<String, Item> items;
+    private DisplayableTreeMap<String, Patron> patrons;
+    private DisplayableTreeMap<String, Item> items;
 }

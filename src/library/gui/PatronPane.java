@@ -9,6 +9,7 @@ import library.model.LibraryDatabase;
 import library.controller.LoginOutUseCase;
 import java.util.Observer;
 import java.util.Observable;
+import library.controller.PatronUseCase;
 
 /** The pane associated with the "Patron" tab on the main card of the GUI
  *
@@ -31,11 +32,11 @@ public class PatronPane extends javax.swing.JPanel implements Observer
 //** FOR ITERATION 2, AFTER MAKING THE SPECIFIED CHANGES TO LibraryDatabase.java 
 //** (BUT NOT BEFORE) REMOVE THE COMMENT-MARKER FROM THE NEXT LINE AND THEN 
 // DELETE THESE COMMENT LINES!
-//        patronsList.setModel(LibraryDatabase.getInstance().getPatronsModel());
+        patronsList.setModel(LibraryDatabase.getInstance().getPatronsModel());
 //** AND DELETE THE NEXT 3 LINES INSTEAD - THEN ALSO DELETE THIS COMMENT!
-        patronsListScrollPane.setVisible(false);
-        addButton.setVisible(false);
-        reportButton.setVisible(false);
+//        patronsListScrollPane.setVisible(false);
+//        addButton.setVisible(false);
+//        reportButton.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -137,8 +138,8 @@ public class PatronPane extends javax.swing.JPanel implements Observer
     }//GEN-LAST:event_patronsListValueChanged
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-//** STUDENTSL ADD CODE HERE TO GO TO THE PATRON DETAILS CARD
-//** THEN REMOVE THESE COMMENT LINES!
+        PatronUseCase.getInstance().start();
+        GUI.getInstance().gotoCard("patrondetails");
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown

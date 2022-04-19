@@ -309,6 +309,9 @@ public class GUI extends javax.swing.JFrame
         getContentPane().add(new MainCard(), "main");
         getContentPane().add(new DateCard(), "date");
         getContentPane().add(new CheckoutDetailsCard(), "checkoutdetails");
+        getContentPane().add(new PatronDetailsCard(), "patrondetails");
+        getContentPane().add(new BookDetailsCard(), "bookdetails");
+        getContentPane().add(new DvdDetailsCard(), "dvddetails");
         
         currentCardName = "main";
         history = new java.util.HashMap<String, String>();

@@ -6,6 +6,7 @@
 package library.controller;
 
 import library.model.Book;
+import library.model.DVD;
 import library.model.Item;
 import library.model.LibraryDatabase;
 
@@ -24,11 +25,11 @@ public class ItemUseCase {
       theItemUseCase = new ItemUseCase();
     return theItemUseCase;
   }
+  
   /** Start the use case
    *
    */
   public void start() {
-
   }
   
   /** Add a new Patron
@@ -54,13 +55,14 @@ public class ItemUseCase {
      * @param rating rating of adding DVD
    */
   public void addDvd(String callNumber, String title, String leaderActor, String rating)throws IllegalArgumentException {
-    Item book = new Book (callNumber,
+    Item dvd = new DVD (callNumber,
                           title,
-                          author);
+                          leaderActor,
+                          rating);
     if(callNumber.isEmpty()||title.isEmpty()||leaderActor.isEmpty()||rating.isEmpty()) {
       throw new IllegalArgumentException("Please enter all informations of the DVD");   
     } else {
-        LibraryDatabase.getInstance().add(book);
+        LibraryDatabase.getInstance().add(dvd);
         //System.out.println( LibraryDatabase.getInstance().getPatronList().size());
     }
   }  

@@ -23,6 +23,12 @@ public class PatronUseCase {
             thePatronUseCase = new PatronUseCase();
         return thePatronUseCase;
     }
+  
+    /** Start the use case
+     *
+     */
+    public void start() {
+    }
 
     /** Add a new Patron
        * @param firstName adding patron's first name
